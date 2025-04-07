@@ -3,16 +3,17 @@ pipeline {
 
     stages {
         stage('Clone Repository') {
-    steps {
-        git branch: 'main', url: 'https://github.com/ManjulaSwami/DO_Practical_5.git'
-    }
-}
-
+            steps {
+                git branch: 'main', url: 'https://github.com/ManjulaSwami/DO_Practical_5.git'
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("java-hello-world-app")
+                    dir('Q3') {
+                        docker.build("java-hello-world-app", ".")
+                    }
                 }
             }
         }
